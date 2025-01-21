@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ActType } from "@/utils/types";
+import { Loader } from "./Loader";
 
 export const Actors = () => {
   const [act, setAct] = useState<ActType[]>([]);
   const [filteredActors, setFilteredActors] = useState<ActType[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
       const { data } = await axios.get("/api/acts");
       console.log(data);
       setAct(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +36,13 @@ export const Actors = () => {
     );
   };
 
-  if (!act) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <>
