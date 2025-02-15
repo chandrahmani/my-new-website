@@ -28,8 +28,8 @@ export const Actors = () => {
     setFilteredActors(
       act.filter(
         (actor) =>
-          actor.name.toLowerCase().includes(search.toLowerCase()) ||
-          actor.movies.some((movie) =>
+          actor?.name?.toLowerCase().includes(search.toLowerCase()) ||
+          actor?.movies?.some((movie) =>
             movie.toLowerCase().includes(search.toLowerCase())
           )
       )
@@ -59,7 +59,7 @@ export const Actors = () => {
             className="w-full px-4 py-2 mb-6 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 mb-5"
             onClick={handleSearch}
           >
             Search
@@ -82,7 +82,9 @@ export const Actors = () => {
                   className="w-full h-40 object-cover rounded-lg mt-4"
                 />
                 <p className="text-gray-600 mt-4">{actor.bio}</p>
-                <h3 className="mt-4 font-medium text-gray-800">Movies</h3>
+                <h3 className="mt-4 font-medium text-gray-800">
+                  {actor.movies}
+                </h3>
               </div>
             ))}
           </div>
